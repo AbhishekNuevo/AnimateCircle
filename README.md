@@ -11,5 +11,5 @@ allprojects {
  
  
  dependencies {
-	        implementation 'com.github.AbhishekNuevo:AnimateCircle:1.0.1'
+	       implementation 'com.github.AbhishekNuevo:AnimateCircle:1.0.2'
 	}
