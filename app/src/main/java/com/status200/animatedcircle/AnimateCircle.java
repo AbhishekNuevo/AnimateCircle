@@ -8,7 +8,6 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class AnimateCircle {
@@ -21,15 +20,16 @@ public class AnimateCircle {
     private boolean increase = true;
     private  int increment = 0;
     private  Handler handler;
-
+    private  String circleColor = "#ff0000";
     private FrameLayout layout;
     private Circle circle;
     private FrameLayout.LayoutParams params;
     private long delay = 0, delayTime = 0;
     private boolean pause = false; private boolean stopAnimation = false;
     private TextView tView; Float constantValue = 700f; boolean hold = false; int holdCycle = 0;
-    String inhale = "Inhale", exhale = "Exhale";
-    public  AnimateCircle(Context context,FrameLayout layout,long oneCycleTimeInsecond, int minimumSize, int maxSize){
+    private String inhale = "Inhale", exhale = "Exhale" , holdString = "Hold";
+    private int holdNoOfCycle = 20;
+    public AnimateCircle(Context context, FrameLayout layout, long oneCycleTimeInsecond, int minimumSize, int maxSize, String circleColor){
         this.context = context;
         this.oneCycleTime = oneCycleTime;
         this.minimumSize = minimumSize;
@@ -40,9 +40,12 @@ public class AnimateCircle {
                 FrameLayout.LayoutParams.MATCH_PARENT);
         this.delay =  oneCycleTimeInsecond / ( maxSize - minimumSize ) + 20;
         tView = new TextView(context);
-        tView.setText("Inhale");
+
+        tView.setTypeface(null, Typeface.BOLD);
         tView.setTextColor(Color.parseColor("#ffffff"));
         delayTime = this.delay - 20;
+        this.circleColor = circleColor;
+        this.factor = maxSize;
         Log.e("Animation delay","" + delay);
     }
    int previousFactor = factor; ;
@@ -56,8 +59,8 @@ public class AnimateCircle {
                 if (hold){
                     delay = delayTime + 20;
                     holdCycle = holdCycle + 1;
-                    tView.setText("HOLD");
-                    if (holdCycle > 20){
+                    tView.setText(holdString);
+                    if (holdCycle > holdNoOfCycle){
                         hold = false;
                         holdCycle = 0;
                     }
@@ -65,35 +68,40 @@ public class AnimateCircle {
                 if(!pause && !hold) {// if pause if false then execute or when hold is false then run
                     layout.removeAllViews();
 
-                    circle = new Circle(context, factor);
+                    circle = new Circle(context, factor,circleColor);
                     layout.setLayoutParams(params);
                     layout.addView(circle,0);
                     layout.addView(tView, 1);
                     tView.setGravity(Gravity.CENTER );
 
-
-
                     if (factor >= maxSize) {
                         increase = false;
                         hold = true;
 
+
                     } else if (factor <= minimumSize) {
                         increase = true;
                         hold = true;
+
                     }
                     float textSize = factor / 3 ;
                     if (increase) {
                         factor = factor + 1;
-                        tView.setText("EXHALE");
-                        tView.setTextSize(TypedValue.COMPLEX_UNIT_SP, constantValue/textSize);
+                        if(!hold) {
+                            tView.setText(exhale);
+                            //tView.setTextSize(TypedValue.COMPLEX_UNIT_SP, constantValue/textSize);
+                        }
 
 
                     } else {
                         factor = factor - 1;
-                        tView.setText("INHALE");
-                        tView.setTextSize(TypedValue.COMPLEX_UNIT_SP, constantValue/textSize);
+                        if(!hold) {
+                            tView.setText(inhale);
+                            // tView.setTextSize(TypedValue.COMPLEX_UNIT_SP, constantValue/textSize);
+                        }
 
                     }
+
 
                     if(maxSize - factor < 10 || factor - minimumSize < 10){
                         if(factor > previousFactor){// rise
@@ -153,5 +161,15 @@ public class AnimateCircle {
     public void setInhaleExhaleText(String inhale, String exhale){
         this.inhale = inhale;
         this.exhale = exhale;
+    }
+
+    public void setHoldNoOfCycle(int holdNoOfCycle){
+        this.holdNoOfCycle = holdNoOfCycle;
+    }
+    public void setTextSize(int size){
+        tView.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
+    }
+    public void setHoldText(String holdString){
+        this.holdString = holdString;
     }
 }

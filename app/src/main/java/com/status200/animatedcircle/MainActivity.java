@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        circle = new Circle(this, 10);
+
         button = findViewById(R.id.button);
         stopButton = findViewById(R.id.stopButton);
 
@@ -35,13 +35,13 @@ public class MainActivity extends AppCompatActivity  {
         tview.setText("Inhale");
 
          layout = (FrameLayout)findViewById(R.id.content);
-        params = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT);
-        layout.setLayoutParams(params);
-        layout.addView(circle,0);
-        layout.addView(tview, 1);
-        tview.setGravity(Gravity.CENTER );
+//        params = new FrameLayout.LayoutParams(
+//                FrameLayout.LayoutParams.MATCH_PARENT,
+//                FrameLayout.LayoutParams.MATCH_PARENT);
+//        layout.setLayoutParams(params);
+//        layout.addView(circle,0);
+//        layout.addView(tview, 1);
+//        tview.setGravity(Gravity.CENTER );
 
        // circle.setLayoutParams(new FrameLayout.LayoutParams(100, 100));
         //params.addRule(RelativeLayout.CENTER_IN_PARENT);
@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity  {
 
       //  layout.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL);
 
-        final AnimateCircle animateCircle = new AnimateCircle(this,layout,2500,110,200);
+        final AnimateCircle animateCircle = new AnimateCircle(this,layout,2600,110,200,"#ff8900");
+        animateCircle.setTextSize(10);
+        animateCircle.setHoldText("");
         animateCircle.startAnimation();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
