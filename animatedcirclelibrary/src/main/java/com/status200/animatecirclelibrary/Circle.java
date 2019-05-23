@@ -15,11 +15,11 @@ public class Circle extends View {
     private Paint mCircleGray;
     private float mRadius;
     private RectF mArcBounds = new RectF();
-  int factor = 2;
-    public Circle(Context context, int factor) {
+    int factor = 2;
+    public Circle(Context context, int factor,String color) {
         super(context);
         this.factor = factor;
-        initPaints();
+        initPaints( color);
     }
     public Circle(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -31,12 +31,12 @@ public class Circle extends View {
         this(context, attrs, 0);
     }
 
-    private void initPaints() {
+    private void initPaints(String color) {
 
 
         mCircleGray = new Paint();
         mCircleGray.setStyle(Paint.Style.FILL);
-        mCircleGray.setColor(Color.RED);
+        mCircleGray.setColor(Color.parseColor(color));
 
 
     }
@@ -65,7 +65,7 @@ public class Circle extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mArcBounds.set(0 + factor,0 + factor,getWidth() - factor,getHeight() - factor);
-      canvas.drawOval(mArcBounds,mCircleGray);
+        canvas.drawOval(mArcBounds,mCircleGray);
 
     }
 

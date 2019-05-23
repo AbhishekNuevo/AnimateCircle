@@ -28,6 +28,7 @@ public class AnimateCircle {
     private long delay = 0, delayTime = 0;
     private boolean pause = false; private boolean stopAnimation = false;
     private TextView tView; Float constantValue = 700f; boolean hold = false; int holdCycle = 0;
+    String inhale = "Inhale", exhale = "Exhale";
     public  AnimateCircle(Context context,FrameLayout layout,long oneCycleTimeInsecond, int minimumSize, int maxSize){
         this.context = context;
         this.oneCycleTime = oneCycleTime;
@@ -148,5 +149,9 @@ public class AnimateCircle {
     public void stop(){
       this.stopAnimation = true;
         pause = true;
+    }
+    public void setInhaleExhaleText(String inhale, String exhale){
+        this.inhale = inhale;
+        this.exhale = exhale;
     }
 }
