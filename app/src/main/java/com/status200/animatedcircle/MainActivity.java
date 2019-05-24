@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity  {
 
       //  layout.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL);
 
-        final AnimateCircle animateCircle = new AnimateCircle(this,layout,2600,110,200,"#ff8900");
+        final AnimateCircle animateCircle = new AnimateCircle(this,layout,2500,30,85,"#ff8900");
         animateCircle.setTextSize(10);
-        animateCircle.setHoldText("");
+        //animateCircle.setHoldText("");
         animateCircle.startAnimation();
         button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -28,7 +28,8 @@ public class AnimateCircle {
     private boolean pause = false; private boolean stopAnimation = false;
     private TextView tView; Float constantValue = 700f; boolean hold = false; int holdCycle = 0;
     private String inhale = "Inhale", exhale = "Exhale" , holdString = "Hold";
-    private int holdNoOfCycle = 20;
+    private int holdNoOfCycle = 17;
+    private int midValue;
     public AnimateCircle(Context context, FrameLayout layout, long oneCycleTimeInsecond, int minimumSize, int maxSize, String circleColor){
         this.context = context;
         this.oneCycleTime = oneCycleTime;
@@ -40,12 +41,13 @@ public class AnimateCircle {
                 FrameLayout.LayoutParams.MATCH_PARENT);
         this.delay =  oneCycleTimeInsecond / ( maxSize - minimumSize ) + 20;
         tView = new TextView(context);
-
+        tView.setText(inhale);
         tView.setTypeface(null, Typeface.BOLD);
         tView.setTextColor(Color.parseColor("#ffffff"));
         delayTime = this.delay - 20;
         this.circleColor = circleColor;
         this.factor = maxSize;
+        this.midValue = (maxSize + minimumSize ) /2;
         Log.e("Animation delay","" + delay);
     }
    int previousFactor = factor; ;
@@ -59,7 +61,7 @@ public class AnimateCircle {
                 if (hold){
                     delay = delayTime + 20;
                     holdCycle = holdCycle + 1;
-                    tView.setText(holdString);
+                   // tView.setText(holdString);
                     if (holdCycle > holdNoOfCycle){
                         hold = false;
                         holdCycle = 0;
@@ -107,18 +109,18 @@ public class AnimateCircle {
                         if(factor > previousFactor){// rise
 
 
-                            if (factor <= 155){//slow speed
-                                delay = delay - 5;
-                            }else if (factor > 155){// speed fast
-                                delay = delay + 5;
+                            if (factor <= midValue){//slow speed
+                                delay = delay - 2;
+                            }else if (factor > midValue){// speed fast
+                                delay = delay + 2;
                             }
                             Log.e("Animation","factor " + factor + "fall" + "delay " + delay );
                         }else if (factor < previousFactor){// fall
 
-                            if (factor <= 155){//slow speed
-                                delay = delay + 5;
-                            }else if (factor > 155){// speed fast
-                                delay = delay - 5;
+                            if (factor <= midValue){//slow speed
+                                delay = delay + 2;
+                            }else if (factor > midValue){// speed fast
+                                delay = delay - 2;
                             }
                             Log.e("Animation","factor " + factor + "rise" + "delay " + delay);
                         }

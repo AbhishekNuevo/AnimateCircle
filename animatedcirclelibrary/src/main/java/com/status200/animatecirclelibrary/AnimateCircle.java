@@ -61,7 +61,7 @@ public class AnimateCircle {
                 if (hold){
                     delay = delayTime + 20;
                     holdCycle = holdCycle + 1;
-                    tView.setText(holdString);
+                   // tView.setText(holdString);
                     if (holdCycle > holdNoOfCycle){
                         hold = false;
                         holdCycle = 0;

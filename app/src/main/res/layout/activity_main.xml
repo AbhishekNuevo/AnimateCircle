@@ -22,8 +22,8 @@
         android:gravity="center_horizontal"/>
 
     <FrameLayout
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true">
    <FrameLayout
